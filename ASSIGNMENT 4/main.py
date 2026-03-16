@@ -3,8 +3,7 @@ from pydantic import BaseModel, Field
 
 app = FastAPI()
 
-# DATA
-
+#data 
 products = {
     1: {"name": "Wireless Mouse", "price": 499, "stock": 10},
     2: {"name": "Notebook", "price": 99, "stock": 50},
@@ -17,15 +16,14 @@ orders = []
 order_counter = 1
 
 
-# MODELS
-
+#models
 class CheckoutRequest(BaseModel):
     customer_name: str = Field(..., min_length=2)
     delivery_address: str = Field(..., min_length=10)
 
 
 
-# ADD TO CART
+#add to cart 
 @app.post("/cart/add")
 def add_to_cart(product_id: int, quantity: int = 1):
 
@@ -62,8 +60,7 @@ def add_to_cart(product_id: int, quantity: int = 1):
     }
 
 
-# VIEW CART
-
+#view cart
 @app.get("/cart")
 def view_cart():
 
@@ -80,8 +77,7 @@ def view_cart():
     }
 
 
-# REMOVE ITEM
-
+#remove item
 @app.delete("/cart/{product_id}")
 def remove_item(product_id: int):
 
@@ -95,8 +91,7 @@ def remove_item(product_id: int):
     }
 
 
-# CHECKOUT
-
+#check out 
 @app.post("/cart/checkout")
 def checkout(data: CheckoutRequest):
 
@@ -135,8 +130,7 @@ def checkout(data: CheckoutRequest):
     }
 
 
-# VIEW ORDERS
-
+#view orders 
 @app.get("/orders")
 def get_orders():
 
